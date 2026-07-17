@@ -41,7 +41,7 @@ fun NotificationButton(
             }
         ) {
             Icon(
-                imageVector = Icons.Default.Notifications,
+                imageVector = Icons.Outlined.Notifications,
                 contentDescription = "Notifications"
             )
         }

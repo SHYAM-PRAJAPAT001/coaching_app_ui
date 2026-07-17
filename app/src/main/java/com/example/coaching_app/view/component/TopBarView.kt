@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.PersonPin
 import androidx.compose.material.icons.outlined.MoreVert
@@ -33,6 +34,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
 import com.example.coaching_app.view.main.DrawerItem
 import com.example.coaching_app.view.main.NotificationButton
@@ -50,75 +52,80 @@ fun TopBar(
     navigateDest : (String) -> Unit
 ){
 
+        val screenSize = LocalConfiguration.current.screenWidthDp.dp
+
         Row(
             modifier = Modifier
                 .fillMaxWidth()
+                .padding(10.dp)
                 .height(40.dp)
-                .padding(horizontal = 15.dp),
-            verticalAlignment = Alignment.CenterVertically,
-
         ){
 
 
+            Row(
+                modifier = Modifier.weight(0.6f),
+                verticalAlignment = Alignment.CenterVertically
+            ){
+                IconButton(
+                    onClick = {
+                        drawerState()
+                    },
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.AccountCircle,
+                        contentDescription = null,
+                        modifier = Modifier.size(30.dp)
+                    )
+                }
 
-            IconButton(
-                onClick = {
-                    drawerState()
-                },
-            ) {
-                Icon(
-                    imageVector = Icons.Outlined.Person,
-                    contentDescription = "Profile",
+                Spacer(modifier = Modifier.width(10.dp))
+
+                Row(
                     modifier = Modifier
+                        .weight(1f)
+                        .height(30.dp)
                         .border(
-                            shape = CircleShape,
                             width = 1.dp,
-                            color = Color.Black
-                        )
-                        .padding(2.dp),
-                    tint = Color.Black
-                )
+                            color = Color.Black,
+                            shape = RoundedCornerShape(10.dp)
+                        ).clickable(
+                            onClick = {
+                                searchExpand()
+                            }
+                        ),
+                    verticalAlignment = Alignment.CenterVertically,
+                ){
+
+                    Spacer(modifier = Modifier.width(5.dp))
+                    Icon(
+                        Icons.Outlined.Search,
+                        contentDescription = placeHolderTitle,
+                        modifier = Modifier
+                            .size(25.dp)
+                            .padding(horizontal = 3.dp)
+                    )
+
+                    Text(text = placeHolderTitle)
+                }
             }
 
-            Spacer(modifier = Modifier.width(10.dp))
+
 
             Row(
-                modifier = Modifier
-                    .weight(1f)
-                    .border(
-                        width = 1.dp,
-                        color = Color.Black,
-                        shape = RoundedCornerShape(10.dp)
-                    ).clickable(
-                        onClick = {
-                            searchExpand()
-                        }
-                    ),
+                horizontalArrangement = Arrangement.End,
                 verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier
+                    .weight(0.3f)
             ){
 
-                Icon(
-                    Icons.Outlined.Search,
-                    contentDescription = placeHolderTitle,
-                    modifier = Modifier.padding(horizontal = 10.dp)
+                NotificationButton(
+                    count = notificationsCount,
+                    onClick = {
+                        increaseCount()
+                    } ,
                 )
 
-                Text(text = placeHolderTitle)
-            }
 
-            Spacer(modifier = Modifier.width(10.dp))
-
-
-            NotificationButton(
-                count = notificationsCount,
-                onClick = {
-                    increaseCount()
-                } ,
-            )
-
-            Spacer(modifier = Modifier.width(10.dp))
-
-            Box{
                 IconButton(
                     onClick = {
                         expandMenu(true)
@@ -129,6 +136,9 @@ fun TopBar(
                         contentDescription = null
                     )
                 }
+            }
+
+            Box{
 
                 DropdownMenu(
                     expanded = menuState,
@@ -138,7 +148,7 @@ fun TopBar(
                 ) {
                     Column(
                         modifier = Modifier.fillMaxWidth(),
-                        horizontalAlignment = Alignment.CenterHorizontally,
+                        horizontalAlignment = Alignment.End,
                         verticalArrangement = Arrangement.Center
                     ){
 
@@ -160,5 +170,7 @@ fun TopBar(
                     }
                 }
             }
+
+
         }
 }

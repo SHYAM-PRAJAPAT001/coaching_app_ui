@@ -11,6 +11,9 @@ composeBom = "2024.10.00"
 navigationCompose = "2.8.3"
 runtime = "1.7.5"
 runtimeVersion = "1.0.0-alpha15"
+youtubePlayer = "12.1.1"
+coil = "2.7.0"
+media3Extractor = "1.10.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -30,6 +33,9 @@ androidx-compose-material3 = { group = "androidx.compose.material3", name = "mat
 androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationCompose" }
 androidx-compose-runtime = { group = "androidx.compose.runtime", name = "runtime", version.ref = "runtime" }
 androidx-runtime = { group = "androidx.xr.runtime", name = "runtime", version.ref = "runtimeVersion" }
+youtube-player = { group = "io.github.pierfrancescosoffritti.androidyoutubeplayer", name = "core", version.ref = "youtubePlayer" }
+coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
+androidx-media3-extractor = { group = "androidx.media3", name = "media3-extractor", version.ref = "media3Extractor" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
